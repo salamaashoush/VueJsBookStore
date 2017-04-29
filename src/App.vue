@@ -2,7 +2,7 @@
   <div>
     <navbar></navbar>
     <div id="app" class="ui container" style="margin-bottom: 100px">
-      <register></register>
+      <login></login>
       <books></books>
     </div>
   </div>

@@ -7,7 +7,7 @@
           Register new  account
         </div>
       </h2>
-      <form class="ui large form">
+      <form class="ui large form"  @submit.prevent="userRegister">
         <div class="ui stacked segment">
           <div class="field">
             <div class="ui left icon input">
@@ -39,7 +39,7 @@
               <input type="password" name="confirm" v-model="user.confirm_password" placeholder="Confirm Password">
             </div>
           </div>
-          <div class="ui fluid large teal submit button" @click="userRegister">Login</div>
+          <input type="submit" class="ui fluid large teal submit button" value="Login">
         </div>
 
         <div class="ui error message">
@@ -107,6 +107,8 @@
               firstName: 'empty',
               lastName: 'empty',
             },
+            inline: true,
+            on: 'blur',
           });
       });
     },
@@ -121,6 +123,8 @@
               firstName: 'empty',
               lastName: 'empty',
             },
+            inline: true,
+            on: 'blur',
           });
       });
     },

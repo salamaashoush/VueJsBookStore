@@ -16,7 +16,9 @@ if (localStorage.getItem('token')) {
     localStorage.setItem('user', JSON.stringify(response.data.user));
     localStorage.setItem('token', response.data.token);
   }).catch((err) => {
+// eslint-disable-next-line no-console
     console.log('you need to login again');
+// eslint-disable-next-line no-console
     console.log(err);
   });
 }

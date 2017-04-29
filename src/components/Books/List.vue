@@ -3,7 +3,7 @@
 */
 <template>
   <div class="ui special cards">
-    <book v-for="book in books" :book="book"></book>
+    <book v-for="book in books " :key="book.id" :book="book"></book>
   </div>
 </template>
 <script>

@@ -7,12 +7,12 @@
           Log-in to your account
         </div>
       </h2>
-      <form class="ui large form">
+      <form class="ui large form" @submit.prevent="userLogin">
         <div class="ui stacked segment">
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" v-model="user.username" placeholder="E-mail address">
+              <input type="text" name="username" v-model="user.username" placeholder="E-mail address">
             </div>
           </div>
           <div class="field">
@@ -21,15 +21,15 @@
               <input type="password" name="password" v-model="user.password" placeholder="Password">
             </div>
           </div>
-          <div class="ui fluid large teal submit button" @click="userLogin">Login</div>
+          <input type="submit" class="ui fluid large teal submit button" value="Login">
         </div>
 
         <div class="ui error message">
 
         </div>
         <error>
-          <template slot="header">Validation Errors</template>
-          <template slot="message">Please Try Again with a valid data</template>
+          <template slot="header">Error</template>
+          <template slot="message">Wrong username or password!</template>
         </error>
       </form>
 
@@ -63,9 +63,11 @@
         window.$('.ui.form')
           .form({
             fields: {
-              email: 'empty',
+              username: 'email',
               password: ['minLength[6]', 'empty'],
             },
+            inline: true,
+            on: 'blur',
           });
       });
     },
@@ -74,9 +76,11 @@
         window.$('.ui.form')
           .form({
             fields: {
-              email: 'empty',
+              username: 'email',
               password: ['minLength[6]', 'empty'],
             },
+            inline: true,
+            on: 'blur',
           });
       });
     },
