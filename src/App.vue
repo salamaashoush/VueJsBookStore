@@ -2,8 +2,7 @@
   <div>
     <navbar></navbar>
     <div id="app" class="ui container" style="margin-bottom: 100px">
-      <login></login>
-      <books></books>
+     <router-view></router-view>
     </div>
   </div>
 </template>

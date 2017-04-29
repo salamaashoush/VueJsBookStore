@@ -2,9 +2,13 @@
 * Created by salamaashoush on 28/04/17.
 */
 <template>
-  <div class="ui special cards">
-    <book v-for="book in books " :key="book.id" :book="book"></book>
+  <div>
+    <div class="ui header">All Books</div>
+    <div class="ui special cards">
+      <book v-for="book in books " :key="book.id" :book="book"></book>
+    </div>
   </div>
+
 </template>
 <script>
   import Api from '../../api/api';

@@ -2,32 +2,17 @@
   <div>
     <div class="ui large inverted top fixed menu">
       <div class="ui container">
-        <a class="active item">Home</a>
-        <a class="item">Categories</a>
-        <a class="item" href="/books">Books</a>
-        <a class="item">Careers</a>
+        <router-link to="/" class="item">Home</router-link>
+        <router-link to="/categories" class="item">Categories</router-link>
+        <router-link to="/books" class="item">Books</router-link>
+        <router-link to="/authors" class="item">Authors</router-link>
         <div class="right menu">
-          <a class="item" v-show="isLogedIn">{{user.first_name+" "+user.last_name}}</a>
-          <a class="item" v-show="isLogedIn">Edit Profile</a>
-          <div class="item" v-show="isLogedIn">
-            <a class="ui red button">Log out</a>
-          </div>
-          <div class="item" v-show="!isLogedIn">
-            <a class="ui button">Log in</a>
-          </div>
-          <div class="item" v-show="!isLogedIn">
-            <a class="ui primary button">Sign Up</a>
-          </div>
+          <router-link to="/profile" class="item" v-show="isLogedIn">{{user.first_name+" "+user.last_name}}</router-link>
+          <router-link to="/logout" class="item" v-show="isLogedIn">Logout</router-link>
+          <router-link to="/login" class="item" v-show="!isLogedIn">Login</router-link>
+          <router-link to="/register" class="item" v-show="!isLogedIn">Register</router-link>
         </div>
       </div>
-    </div>
-    <div class="ui vertical inverted sidebar menu left">
-      <a class="active item">Home</a>
-      <a class="item">Work</a>
-      <a class="item">Company</a>
-      <a class="item">Careers</a>
-      <a class="item">Login</a>
-      <a class="item">Signup</a>
     </div>
   </div>
 </template>

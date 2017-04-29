@@ -2,8 +2,8 @@
  * Created by salamaashoush on 28/04/17.
  */
 class Errors {
-  constructor(errors) {
-    this.errors = errors;
+  constructor() {
+    this.errors = {};
   }
 // eslint-disable-next-line consistent-return
   get(field) {
@@ -22,7 +22,11 @@ class Errors {
     this.errors = errors;
   }
   clear(field) {
-    delete this.errors[field];
+    if (field){
+      delete this.errors[field];
+      return;
+    };
+    this.errors = {};
   }
 }
 export default Errors;
