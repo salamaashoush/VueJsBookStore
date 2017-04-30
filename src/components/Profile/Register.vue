@@ -1,6 +1,6 @@
 <template>
   <div class="ui middle aligned center aligned grid">
-    <div class="column">
+    <div class="column" style="width: 50%; margin-top: 10%;">
       <h2 class="ui teal image header">
         <img src="../../assets/logo.png" class="image">
         <div class="content">
@@ -45,27 +45,27 @@
         <div class="ui error message">
 
         </div>
-        <error>
-          <template slot="header">Error</template>
-          <template slot="message">Please Try Again with a valid data</template>
-        </error>
-        <notify>
-          <template slot="header-icon"><i class="check icon"></i></template>
-          <template slot="header">Success</template>
-          <template slot="message">User Created Successfully</template>
-          <template slot="action">
-            <div class="ui red basic cancel inverted button">
-              <i class="remove icon"></i>
-              Ok
-            </div>
-            <div class="ui red basic ok inverted button">
-              <i class="login icon"></i>
-              Login
-            </div>
-          </template>
-        </notify>
       </form>
     </div>
+    <error>
+      <template slot="header">Error</template>
+      <template slot="message">Please Try Again with a valid data</template>
+    </error>
+    <notify>
+      <template slot="header-icon"><i class="check icon"></i></template>
+      <template slot="header">Success</template>
+      <template slot="message">User Created Successfully</template>
+      <template slot="action">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
+          Ok
+        </div>
+        <div class="ui red basic ok inverted button">
+          <i class="login icon"></i>
+          Login
+        </div>
+      </template>
+    </notify>
   </div>
 </template>
 <script>
@@ -85,9 +85,7 @@
     methods: {
       userRegister() {
         Api.register(this.user)
-          .then((response) => {
-// eslint-disable-next-line no-console
-            console.log(response.data);
+          .then(() => {
             window.$('#notify_modal').modal('show');
           })
           .catch(() => {

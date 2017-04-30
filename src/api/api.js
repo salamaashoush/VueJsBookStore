@@ -4,25 +4,16 @@
  */
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:8000';
-
+axios.defaults.baseURL = 'https://djangobooks.herokuapp.com/';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
-if (localStorage.getItem('token')) {
-  const token = localStorage.getItem('token').split(' ')[1];
-  axios.post('api-token-verify/', {
-    token,
-  }).then((response) => {
-    axios.defaults.headers.common['Authorization'] = response.data.token;
-    localStorage.setItem('user', JSON.stringify(response.data.user));
-    localStorage.setItem('token', response.data.token);
-  }).catch((err) => {
-// eslint-disable-next-line no-console
-    console.log('you need to login again');
-// eslint-disable-next-line no-console
-    console.log(err);
-  });
-}
+
 export default {
+  checkLogin() {
+    if (localStorage.getItem('token')) {
+      return true;
+    }
+    return false;
+  },
   verfiyToken(token) {
     return axios.post('api-token-verify/', {
       token: token.split(' ')[1],
@@ -36,12 +27,7 @@ export default {
     return axios.post('api-token-auth/', {
       username,
       password,
-    })
-      .then((response) => {
-        axios.defaults.headers.common['Authorization'] = response.data.token;
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-        localStorage.setItem('token', response.data.token);
-      });
+    });
   },
   register(user) {
     return axios.post('users/register/', user);
@@ -53,30 +39,27 @@ export default {
     return axios.get('/books/');
   },
   getBook(bookId) {
-    return axios.get(`/books/${bookId}`);
-  },
-  rateBook(bookId) {
-    return bookId;
+    return axios.get(`/books/${bookId}/`);
   },
   readBook(bookId) {
-    return bookId;
+    return axios.get(`/books/${bookId}/read`);
   },
   getCategories() {
     return axios.get('/categories/');
   },
   getCategory(categoryId) {
-    return axios.get(`/categories/${categoryId}`);
+    return axios.get(`/categories/${categoryId}/`);
   },
   subscribeCategory(categoryId) {
-    return categoryId;
+    return axios.post(`/categories/${categoryId}/subscribe/`);
   },
   getAuthors() {
     return axios.get('/authors/');
   },
   getAuthor(authorId) {
-    return axios.get(`/authors/${authorId}`);
+    return axios.get(`/authors/${authorId}/`);
   },
   followAuthor(authorId) {
-    return authorId;
+    return axios.post(`/authors/${authorId}/follow/`);
   },
 };

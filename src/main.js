@@ -13,3 +13,4 @@ new Vue({
   template: '<App/>',
   components: { App },
 });
+window.baseUrl = 'http://localhost:8000';

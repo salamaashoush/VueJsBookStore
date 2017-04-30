@@ -1,6 +1,6 @@
 <template>
   <div class="ui middle aligned center aligned grid">
-    <div class="column">
+    <div class="column" style="width: 50%; margin-top: 10%;">
       <h2 class="ui teal image header">
         <img src="../../assets/logo.png" class="image">
         <div class="content">
@@ -27,21 +27,26 @@
         <div class="ui error message">
 
         </div>
-        <error>
-          <template slot="header">Error</template>
-          <template slot="message">Wrong username or password!</template>
-        </error>
+
       </form>
 
       <div class="ui message">
-        New to us? <a href="#">Sign Up</a>
+        New to us?
+        <router-link to="/register">Register</router-link>
       </div>
     </div>
+    <error>
+      <template slot="header">Error</template>
+      <template slot="message">Wrong username or password!</template>
+    </error>
   </div>
 </template>
 <script>
+  /* eslint-disable dot-notation */
+  import axios from 'axios';
   import Error from '@/components/Site/ErrorModal';
   import Api from '../../api/api';
+
 
   export default {
     components: { Error },
@@ -53,7 +58,12 @@
     methods: {
       userLogin() {
         Api.login(this.user.username, this.user.password)
-          .catch(() => {
+          .then((response) => {
+            axios.defaults.headers.common['Authorization'] = response.data.token;
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', response.data.token);
+            window.location = '/';
+          }).catch(() => {
             window.$('#error_modal').modal('show');
           });
       },

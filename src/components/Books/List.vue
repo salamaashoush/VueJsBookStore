@@ -26,20 +26,6 @@
       Api.getBooks().then((response) => {
         this.books = response.data;
       });
-      window.$(document).ready(() => {
-        window.$('.special.cards .image').dimmer({
-          on: 'hover',
-        });
-        window.$('.ui.rating').rating();
-      });
-    },
-    updated() {
-      window.$(document).ready(() => {
-        window.$('.special.cards .image').dimmer({
-          on: 'hover',
-        });
-        window.$('.ui.rating').rating();
-      });
     },
   }
   ;

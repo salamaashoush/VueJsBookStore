@@ -1,53 +1,55 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-      <br>
-      <li><a href="http://vuejs-templates.github.io/webpack/" target="_blank">Docs for This Template</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div>
+    <div class="pusher">
+      <div class="ui inverted vertical masthead center aligned segment" style="padding: 200px">
+        <div class="ui text container">
+          <h1 class="ui inverted header">
+            Welcome to our Book Store
+          </h1>
+          <h2>Read whatever you want when you want to.</h2>
+          <router-link v-if="!isLogedIn" class="ui huge primary button" to="/login">Get Started <i
+            class="right arrow icon"></i>
+          </router-link>
+        </div>
+
+        </div>
+      </div>
+    <div v-if="isLogedIn">
+      <div class="ui horizontal divider">
+        Latest Books
+      </div>
+      <div class="ui special cards">
+        <book v-for="book in books " :key="book.id" :book="book"></book>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
-export default {
-  name: 'hello',
-  data() {
-    return {
-      msg: 'Welcome to Your Vue.js App',
-    };
-  },
-};
+  import Api from '../api/api';
+  import Book from './Books/Book';
+
+  export default {
+    name: 'hello',
+    components: { Book },
+    data() {
+      return {
+        isLogedIn: false,
+        books: [],
+      };
+    },
+    mounted() {
+      if (Api.logedInUser()) {
+        Api.getBooks().then((response) => {
+          this.books = response.data;
+        });
+        this.isLogedIn = true;
+      }
+    },
+  };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
+<style>
 </style>
